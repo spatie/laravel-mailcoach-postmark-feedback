@@ -18,6 +18,7 @@ class PostmarkSignatureValidatorTest extends TestCase
         parent::setUp();
 
         $this->config = PostmarkWebhookConfig::get();
+        $this->config->signingSecret = 'user:pw';
 
         $this->validator = new PostmarkSignatureValidator();
     }
@@ -25,13 +26,19 @@ class PostmarkSignatureValidatorTest extends TestCase
     /** @test */
     public function it_requires_signature_data()
     {
-        // TO DO: implement test
+        $request = new Request();
+        $request->headers->set('PHP_AUTH_USER', 'user');
+        $request->headers->set('PHP_AUTH_PW', 'pw');
+
+        $this->assertTrue($this->validator->isValid($request, $this->config));
     }
 
     /** @test * */
     public function it_fails_if_signature_is_missing()
     {
-        // TO DO: implement test
+        $request = new Request();
+
+        $this->assertFalse($this->validator->isValid($request, $this->config));
     }
 
     /** @test * */
@@ -43,6 +50,10 @@ class PostmarkSignatureValidatorTest extends TestCase
     /** @test * */
     public function it_fails_if_signature_is_invalid()
     {
-        // TO DO: implement test
+        $request = new Request();
+        $request->headers->set('PHP_AUTH_USER', 'user');
+        $request->headers->set('PHP_AUTH_PW', 'wrong');
+
+        $this->assertFalse($this->validator->isValid($request, $this->config));
     }
 }

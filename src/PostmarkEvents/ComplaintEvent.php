@@ -8,7 +8,7 @@ class ComplaintEvent extends PostmarkEvent
 {
     public function canHandlePayload(): bool
     {
-        // TO DO: implement
+        return $this->event === 'SpamComplaint';
     }
 
     public function handle(Send $send)

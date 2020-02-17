@@ -9,12 +9,12 @@ class ClickEvent extends PostmarkEvent
 {
     public function canHandlePayload(): bool
     {
-        // TO DO: implement
+        return $this->event === 'Click';
     }
 
     public function handle(Send $send)
     {
-        $url = Arr::get($this->payload, 'event-data.url');
+        $url = Arr::get($this->payload, 'OriginalLink');
 
         $send->registerClick($url);
     }
