@@ -1,0 +1,25 @@
+{
+  "RecordType": "Bounce",
+  "MessageStream": "outbound",
+  "ID": 42,
+  "Type": "SoftBounce",
+  "TypeCode": 1,
+  "Name": "Soft bounce",
+  "Tag": "Test",
+  "MessageID": "20130503192659.13651.20287@mg.craftremote.com",
+  "Metadata" : {
+    "a_key" : "a_value",
+    "b_key": "b_value"
+   },
+  "ServerID": 23,
+  "Description": "A soft bounce",
+  "Details": "Test bounce details",
+  "Email": "john@example.com",
+  "From": "sender@example.com",
+  "BouncedAt": "2019-11-05T16:33:54.9070259Z",
+  "DumpAvailable": true,
+  "Inactive": true,
+  "CanActivate": true,
+  "Subject": "Test subject",
+  "Content": "<Full dump of bounce>"
+}

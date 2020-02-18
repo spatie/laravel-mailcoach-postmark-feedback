@@ -46,6 +46,15 @@ class ProcessPostmarkWebhookJobTest extends TestCase
     }
 
     /** @test */
+    public function it_wil_not_process_a_postmark_soft_bounce_webhook_call()
+    {
+        $this->webhookCall->update(['payload' => $this->getStub('softBounceWebhookContent')]);
+        (new ProcessPostmarkWebhookJob($this->webhookCall))->handle();
+
+        $this->assertEquals(0, SendFeedbackItem::count());
+    }
+
+    /** @test */
     public function it_processes_a_postmark_complaint_webhook_call()
     {
         $this->webhookCall->update(['payload' => $this->getStub('complaintWebhookContent')]);
