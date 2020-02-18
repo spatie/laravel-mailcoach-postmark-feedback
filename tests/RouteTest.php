@@ -3,6 +3,7 @@
 namespace Spatie\MailcoachPostmarkFeedback\Tests;
 
 use Illuminate\Support\Facades\Route;
+use Spatie\MailcoachPostmarkFeedback\PostmarkWebhookConfig;
 
 class RouteTest extends TestCase
 {
@@ -10,26 +11,28 @@ class RouteTest extends TestCase
     {
         parent::setUp();
 
+        config()->set('mailcoach.postmark_feedback.signing_secret', 'user:pw');
+
         Route::postmarkFeedback('postmark-feedback');
     }
 
     /** @test */
     public function it_provides_a_route_macro_to_handle_webhooks()
     {
-        $invalidPayload = $this->getStub('complaintWebhookContent');
+        $payload = $this->getStub('complaintWebhookContent');
 
         $this
-            ->post('postmark-feedback', $invalidPayload, ['PHP_AUTH_USER' => 'user', 'PHP_AUTH_PW' => 'pw'])
+            ->post('postmark-feedback', $payload, ['PHP_AUTH_USER' => 'user', 'PHP_AUTH_PW' => 'pw'])
             ->assertSuccessful();
     }
 
     /** @test */
     public function it_fails_when_using_an_invalid_payload()
     {
-        $invalidPayload = $this->getStub('complaintWebhookContent');
+        $payload = $this->getStub('complaintWebhookContent');
 
         $this
-            ->post('postmark-feedback', $invalidPayload)
+            ->post('postmark-feedback', $payload)
             ->assertStatus(500);
     }
 }

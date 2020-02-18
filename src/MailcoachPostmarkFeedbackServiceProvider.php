@@ -11,7 +11,10 @@ class MailcoachPostmarkFeedbackServiceProvider extends ServiceProvider
 {
     public function register()
     {
-        Route::macro('postmarkFeedback', fn (string $url) => Route::post($url, '\\' . PostmarkWebhookController::class));
+        Route::macro(
+            'postmarkFeedback',
+            fn (string $url) => Route::post($url, '\\' . PostmarkWebhookController::class)
+        );
 
         Event::listen(MessageSent::class, StoreTransportMessageId::class);
     }
