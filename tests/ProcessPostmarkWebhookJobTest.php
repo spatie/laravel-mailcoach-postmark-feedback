@@ -103,4 +103,17 @@ class ProcessPostmarkWebhookJobTest extends TestCase
 
         $this->assertEquals(0, SendFeedbackItem::count());
     }
+
+    /** @test */
+    public function it_will_not_fail_if_RecordType_is_not_set()
+    {
+        $payload = $this->getStub('clickWebhookContent');
+
+        unset($payload['RecordType']);
+
+        $this->webhookCall->update(['payload' => $payload]);
+        (new ProcessPostmarkWebhookJob($this->webhookCall))->handle();
+
+        $this->assertEquals(0, CampaignLink::count());
+    }
 }

@@ -42,12 +42,6 @@ class PostmarkSignatureValidatorTest extends TestCase
     }
 
     /** @test * */
-    public function it_fails_if_data_is_missing()
-    {
-        // TO DO: implement test
-    }
-
-    /** @test * */
     public function it_fails_if_signature_is_invalid()
     {
         $request = new Request();
