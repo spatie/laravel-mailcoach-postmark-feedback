@@ -12,11 +12,9 @@ class PostmarkWebhookConfig
     {
         $config = config('mailcoach.postmark_feedback');
 
-        //TO DO: implement config
-
         return new WebhookConfig([
             'name' => 'postmark-feedback',
-            'signing_secret' => '',
+            'signing_secret' => $config['signing_secret'] ?? '',
             'header_name' => '',
             'signature_validator' => $config['signature_validator'] ?? PostmarkSignatureValidator::class,
             'webhook_profile' =>  $config['webhook_profile'] ?? ProcessEverythingWebhookProfile::class,

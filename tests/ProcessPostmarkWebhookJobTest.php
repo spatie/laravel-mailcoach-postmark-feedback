@@ -91,7 +91,7 @@ class ProcessPostmarkWebhookJobTest extends TestCase
     public function it_does_nothing_when_it_cannot_find_the_transport_message_id()
     {
         $data = $this->webhookCall->payload;
-        $data['event-data']['message']['headers']['message-id'] = 'some-other-id';
+        $data['MessageID'] = 'some-other-id';
 
         $this->webhookCall->update([
             'payload' => $data,

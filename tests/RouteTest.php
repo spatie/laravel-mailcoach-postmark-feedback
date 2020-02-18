@@ -18,10 +18,8 @@ class RouteTest extends TestCase
     {
         $invalidPayload = $this->getStub('complaintWebhookContent');
 
-        $validPayload = $this->addValidSignature($invalidPayload);
-
         $this
-            ->post('postmark-feedback', $validPayload)
+            ->post('postmark-feedback', $invalidPayload, ['PHP_AUTH_USER' => 'user', 'PHP_AUTH_PW' => 'pw'])
             ->assertSuccessful();
     }
 

@@ -15,7 +15,7 @@ abstract class PostmarkEvent
     {
         $this->payload = $payload;
 
-        $this->event = Arr::get($payload, 'event-data.event');
+        $this->event = Arr::get($payload, 'RecordType');
     }
 
     abstract public function canHandlePayload(): bool;

@@ -31,7 +31,7 @@ class ProcessPostmarkWebhookJob extends ProcessWebhookJob
 
     protected function getSend(): ?Send
     {
-        $messageId = Arr::get($this->webhookCall->payload, 'event-data.message.headers.message-id');
+        $messageId = Arr::get($this->webhookCall->payload, 'MessageID');
 
         if (!$messageId) {
             return null;

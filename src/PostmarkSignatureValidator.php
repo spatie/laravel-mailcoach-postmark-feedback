@@ -11,19 +11,12 @@ class PostmarkSignatureValidator implements SignatureValidator
 {
     public function isValid(Request $request, WebhookConfig $config): bool
     {
-        $validator = Validator::make($request->all(), [
-            // add fields to be validated
-        ]);
-
-        if ($validator->fails()) {
+        if (empty($config->signingSecret)) {
             return false;
         }
 
-        return $this->hasValidSignature($request, $config);
-    }
+        [$user, $password] = explode(':', $config->signingSecret);
 
-    public function hasValidSignature(Request $request, WebhookConfig $config): bool
-    {
-        // implement method
+        return $request->getUser() === $user && $request->getPassword() === $password;
     }
 }
