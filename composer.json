@@ -8,13 +8,13 @@
     "homepage": "https://mailcoach.app",
     "authors": [
         {
-            "name": "Benjamin Eberlei",
+            "name": "Freek Van der Herten",
             "email": "freek@spatie.be",
             "homepage": "https://spatie.be",
             "role": "Developer"
         },
         {
-            "name": "Freek Van der Herten",
+            "name": "Benjamin Eberlei",
             "email": "freek@spatie.be",
             "homepage": "https://spatie.be",
             "role": "Developer"
