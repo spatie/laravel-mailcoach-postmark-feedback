@@ -14,8 +14,6 @@ class PostmarkSignatureValidator implements SignatureValidator
             return false;
         }
 
-        [$user, $password] = explode(':', $config->signingSecret);
-
-        return $request->getUser() === $user && $request->getPassword() === $password;
+        return $request->header('mailcoach_signature') === $config->signingSecret;
     }
 }

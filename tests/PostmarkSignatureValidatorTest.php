@@ -18,7 +18,8 @@ class PostmarkSignatureValidatorTest extends TestCase
         parent::setUp();
 
         $this->config = PostmarkWebhookConfig::get();
-        $this->config->signingSecret = 'user:pw';
+
+        $this->config->signingSecret = 'my-secret';
 
         $this->validator = new PostmarkSignatureValidator();
     }
@@ -27,8 +28,8 @@ class PostmarkSignatureValidatorTest extends TestCase
     public function it_requires_signature_data()
     {
         $request = new Request();
-        $request->headers->set('PHP_AUTH_USER', 'user');
-        $request->headers->set('PHP_AUTH_PW', 'pw');
+
+        $request->headers->set('mailcoach_signature', 'my-secret');
 
         $this->assertTrue($this->validator->isValid($request, $this->config));
     }
@@ -45,8 +46,8 @@ class PostmarkSignatureValidatorTest extends TestCase
     public function it_fails_if_signature_is_invalid()
     {
         $request = new Request();
-        $request->headers->set('PHP_AUTH_USER', 'user');
-        $request->headers->set('PHP_AUTH_PW', 'wrong');
+
+        $request->headers->set('mailcoach_signature', 'incorrect-secret');
 
         $this->assertFalse($this->validator->isValid($request, $this->config));
     }

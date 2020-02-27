@@ -11,7 +11,7 @@ class RouteTest extends TestCase
     {
         parent::setUp();
 
-        config()->set('mailcoach.postmark_feedback.signing_secret', 'user:pw');
+        config()->set('mailcoach.postmark_feedback.signing_secret', 'my-secret');
 
         Route::postmarkFeedback('postmark-feedback');
     }
@@ -22,7 +22,7 @@ class RouteTest extends TestCase
         $payload = $this->getStub('complaintWebhookContent');
 
         $this
-            ->post('postmark-feedback', $payload, ['PHP_AUTH_USER' => 'user', 'PHP_AUTH_PW' => 'pw'])
+            ->post('postmark-feedback', $payload, ['mailcoach_signature' => 'my-secret'])
             ->assertSuccessful();
     }
 
