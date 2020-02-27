@@ -29,7 +29,7 @@ class PostmarkSignatureValidatorTest extends TestCase
     {
         $request = new Request();
 
-        $request->headers->set('mailcoach_signature', 'my-secret');
+        $request->headers->set('mailcoach-signature', 'my-secret');
 
         $this->assertTrue($this->validator->isValid($request, $this->config));
     }
@@ -47,7 +47,7 @@ class PostmarkSignatureValidatorTest extends TestCase
     {
         $request = new Request();
 
-        $request->headers->set('mailcoach_signature', 'incorrect-secret');
+        $request->headers->set('mailcoach-signature', 'incorrect-secret');
 
         $this->assertFalse($this->validator->isValid($request, $this->config));
     }

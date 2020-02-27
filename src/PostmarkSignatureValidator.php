@@ -14,6 +14,6 @@ class PostmarkSignatureValidator implements SignatureValidator
             return false;
         }
 
-        return $request->header('mailcoach_signature') === $config->signingSecret;
+        return $request->header('mailcoach-signature') === $config->signingSecret;
     }
 }

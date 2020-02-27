@@ -22,7 +22,7 @@ class RouteTest extends TestCase
         $payload = $this->getStub('complaintWebhookContent');
 
         $this
-            ->post('postmark-feedback', $payload, ['mailcoach_signature' => 'my-secret'])
+            ->post('postmark-feedback', $payload, ['mailcoach-signature' => 'my-secret'])
             ->assertSuccessful();
     }
 
