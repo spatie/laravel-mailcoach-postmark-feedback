@@ -25,10 +25,9 @@
     "IP": "188.2.95.4"
   },
   "MessageID": "20130503192659.13651.20287@mg.craftremote.com",
-  "Metadata" : {
-    "a_key" : "a_value",
-    "b_key": "b_value"
-   },
+    "Metadata" : {
+        "send-uuid" : "my-uuid"
+    },
   "ReceivedAt": "2019-11-05T16:33:54.9070259Z",
   "Tag": "welcome-email",
   "Recipient": "john@example.com"

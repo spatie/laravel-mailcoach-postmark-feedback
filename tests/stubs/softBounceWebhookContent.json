@@ -7,10 +7,9 @@
   "Name": "Soft bounce",
   "Tag": "Test",
   "MessageID": "20130503192659.13651.20287@mg.craftremote.com",
-  "Metadata" : {
-    "a_key" : "a_value",
-    "b_key": "b_value"
-   },
+    "Metadata" : {
+        "send-uuid" : "my-uuid"
+    },
   "ServerID": 23,
   "Description": "A soft bounce",
   "Details": "Test bounce details",

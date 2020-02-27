@@ -25,9 +25,9 @@ class ProcessPostmarkWebhookJobTest extends TestCase
             'payload' => $this->getStub('bounceWebhookContent'),
         ]);
 
-        $this->send = factory(Send::class)->create([
-            'transport_message_id' => '20130503192659.13651.20287@mg.craftremote.com',
-        ]);
+        $this->send = factory(Send::class)->create();
+
+        $this->send->update(['uuid' => 'my-uuid']);
 
         $this->send->campaign->update([
             'track_opens' => true,
@@ -97,10 +97,10 @@ class ProcessPostmarkWebhookJobTest extends TestCase
     }
 
     /** @test */
-    public function it_does_nothing_when_it_cannot_find_the_transport_message_id()
+    public function it_does_nothing_when_it_cannot_find_a_send_for_the_uuid_in_the_webhook()
     {
         $data = $this->webhookCall->payload;
-        $data['MessageID'] = 'some-other-id';
+        $data['Metadata']['send-uuid'] = 'some-other-uuid';
 
         $this->webhookCall->update([
             'payload' => $data,

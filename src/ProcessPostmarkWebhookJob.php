@@ -31,12 +31,14 @@ class ProcessPostmarkWebhookJob extends ProcessWebhookJob
 
     protected function getSend(): ?Send
     {
-        $messageId = Arr::get($this->webhookCall->payload, 'MessageID');
+        $metadata = Arr::get($this->webhookCall->payload, 'Metadata');
 
-        if (!$messageId) {
+        if (! isset($metadata['send-uuid'])) {
             return null;
         }
 
-        return Send::findByTransportMessageId($messageId);
+        $messageId = $metadata['send-uuid'];
+
+        return Send::findByUuid($messageId);
     }
 }

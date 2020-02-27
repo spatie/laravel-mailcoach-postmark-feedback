@@ -7,10 +7,9 @@
   "Name": "Spam complaint",
   "Tag": "Test",
   "MessageID": "20130503192659.13651.20287@mg.craftremote.com",
-  "Metadata" : {
-    "a_key" : "a_value",
-    "b_key": "b_value"
-   },
+    "Metadata" : {
+        "send-uuid" : "my-uuid"
+    },
   "ServerID": 1234,
   "Description": "",
   "Details": "Test spam complaint details",

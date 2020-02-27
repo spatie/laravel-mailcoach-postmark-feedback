@@ -27,8 +27,7 @@
   },
   "MessageID": "20130503192659.13651.20287@mg.craftremote.com",
   "Metadata" : {
-    "a_key" : "a_value",
-    "b_key": "b_value"
+    "send-uuid" : "my-uuid"
    },
   "ReceivedAt": "2017-10-25T15:21:11.9065619Z",
   "Tag": "welcome-email",
