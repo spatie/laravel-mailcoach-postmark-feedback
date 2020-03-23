@@ -6,6 +6,7 @@ use Illuminate\Support\Arr;
 use Spatie\Mailcoach\Models\Send;
 use Spatie\WebhookClient\Models\WebhookCall;
 use Spatie\WebhookClient\ProcessWebhookJob;
+use Spatie\Mailcoach\Support\Config;
 
 class ProcessPostmarkWebhookJob extends ProcessWebhookJob
 {
@@ -14,6 +15,8 @@ class ProcessPostmarkWebhookJob extends ProcessWebhookJob
         parent::__construct($webhookCall);
 
         $this->queue = config('mailcoach.perform_on_queue.process_feedback_job');
+
+        $this->connection = $this->connection ?? Config::getQueueConnection();
     }
 
     public function handle()
