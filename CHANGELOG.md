@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-mailcoach-postmark-feedback` will be documented in this file
 
+## 2.1.0 - 2020-03-24
+
+- add ability to use a custom queue connection
+
 ## 2.0.0 - 2020-03-10
 
 - add support for Laravel 7 and Mailcoach 2
