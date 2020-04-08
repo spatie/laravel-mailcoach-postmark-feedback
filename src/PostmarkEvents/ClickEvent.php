@@ -2,6 +2,7 @@
 
 namespace Spatie\MailcoachPostmarkFeedback\PostmarkEvents;
 
+use Carbon\Carbon;
 use Illuminate\Support\Arr;
 use Spatie\Mailcoach\Models\Send;
 
@@ -15,7 +16,8 @@ class ClickEvent extends PostmarkEvent
     public function handle(Send $send)
     {
         $url = Arr::get($this->payload, 'OriginalLink');
+        $clickedAt = Carbon::parse($this->payload['ReceivedAt']);
 
-        $send->registerClick($url);
+        $send->registerClick($url, $clickedAt);
     }
 }

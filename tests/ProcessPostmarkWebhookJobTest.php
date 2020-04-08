@@ -2,6 +2,7 @@
 
 namespace Spatie\MailcoachPostmarkFeedback\Tests;
 
+use Carbon\Carbon;
 use Spatie\Mailcoach\Enums\SendFeedbackType;
 use Spatie\Mailcoach\Models\CampaignLink;
 use Spatie\Mailcoach\Models\CampaignOpen;
@@ -41,8 +42,11 @@ class ProcessPostmarkWebhookJobTest extends TestCase
         (new ProcessPostmarkWebhookJob($this->webhookCall))->handle();
 
         $this->assertEquals(1, SendFeedbackItem::count());
-        $this->assertEquals(SendFeedbackType::BOUNCE, SendFeedbackItem::first()->type);
-        $this->assertTrue($this->send->is(SendFeedbackItem::first()->send));
+        tap(SendFeedbackItem::first(), function (SendFeedbackItem $sendFeedbackItem) {
+            $this->assertEquals(SendFeedbackType::BOUNCE, $sendFeedbackItem->type);
+            $this->assertEquals(Carbon::parse('2019-11-05T16:33:54.0Z'), $sendFeedbackItem->created_at);
+            $this->assertTrue($this->send->is($sendFeedbackItem->send));
+        });
     }
 
     /** @test */
@@ -61,8 +65,11 @@ class ProcessPostmarkWebhookJobTest extends TestCase
         (new ProcessPostmarkWebhookJob($this->webhookCall))->handle();
 
         $this->assertEquals(1, SendFeedbackItem::count());
-        $this->assertEquals(SendFeedbackType::COMPLAINT, SendFeedbackItem::first()->type);
-        $this->assertTrue($this->send->is(SendFeedbackItem::first()->send));
+        tap(SendFeedbackItem::first(), function (SendFeedbackItem $sendFeedbackItem) {
+            $this->assertEquals(SendFeedbackType::COMPLAINT, $sendFeedbackItem->type);
+            $this->assertEquals(Carbon::parse('2019-11-05T16:33:54.0Z'), $sendFeedbackItem->created_at);
+            $this->assertTrue($this->send->is($sendFeedbackItem->send));
+        });
     }
 
     /** @test */
@@ -74,6 +81,7 @@ class ProcessPostmarkWebhookJobTest extends TestCase
         $this->assertEquals(1, CampaignLink::count());
         $this->assertEquals('http://example.com/signup', CampaignLink::first()->url);
         $this->assertCount(1, CampaignLink::first()->clicks);
+        $this->assertEquals(Carbon::parse('2017-10-25T15:21:11.0Z'), CampaignLink::first()->clicks->first()->created_at);
     }
 
     /** @test */
@@ -83,6 +91,8 @@ class ProcessPostmarkWebhookJobTest extends TestCase
         (new ProcessPostmarkWebhookJob($this->webhookCall))->handle();
 
         $this->assertCount(1, $this->send->campaign->opens);
+        $this->assertEquals(Carbon::parse('2019-11-05T16:33:54.0Z'), $this->send->campaign->opens->first()->created_at);
+
     }
 
     /** @test */

@@ -2,6 +2,7 @@
 
 namespace Spatie\MailcoachPostmarkFeedback\PostmarkEvents;
 
+use Carbon\Carbon;
 use Spatie\Mailcoach\Models\Send;
 
 class ComplaintEvent extends PostmarkEvent
@@ -13,6 +14,8 @@ class ComplaintEvent extends PostmarkEvent
 
     public function handle(Send $send)
     {
-        $send->registerComplaint();
+        $complainedAt = Carbon::parse($this->payload['BouncedAt']);
+
+        $send->registerComplaint($complainedAt);
     }
 }
