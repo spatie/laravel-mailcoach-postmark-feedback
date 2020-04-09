@@ -2,6 +2,7 @@
 
 namespace Spatie\MailcoachPostmarkFeedback\PostmarkEvents;
 
+use Carbon\Carbon;
 use Illuminate\Support\Arr;
 use Spatie\Mailcoach\Models\Send;
 
@@ -22,6 +23,8 @@ class PermanentBounceEvent extends PostmarkEvent
 
     public function handle(Send $send)
     {
-        $send->registerBounce();
+        $bouncedAt = Carbon::parse($this->payload['BouncedAt']);
+
+        $send->registerBounce($bouncedAt);
     }
 }

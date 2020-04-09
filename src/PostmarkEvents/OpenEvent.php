@@ -2,6 +2,7 @@
 
 namespace Spatie\MailcoachPostmarkFeedback\PostmarkEvents;
 
+use Carbon\Carbon;
 use Illuminate\Support\Arr;
 use Spatie\Mailcoach\Models\Send;
 
@@ -18,6 +19,8 @@ class OpenEvent extends PostmarkEvent
             return;
         }
 
-        return $send->registerOpen();
+        $openedAt = Carbon::parse($this->payload['ReceivedAt']);
+
+        return $send->registerOpen($openedAt);
     }
 }
