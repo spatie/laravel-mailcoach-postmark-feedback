@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-mailcoach-postmark-feedback` will be documented in this file
 
+## 2.1.1 - 2020-09-04
+
+- fix time on feedback registration
+
 ## 2.1.0 - 2020-03-24
 
 - add ability to use a custom queue connection
