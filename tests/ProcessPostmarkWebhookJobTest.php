@@ -92,7 +92,16 @@ class ProcessPostmarkWebhookJobTest extends TestCase
 
         $this->assertCount(1, $this->send->campaign->opens);
         $this->assertEquals(Carbon::parse('2019-11-05T16:33:54.0Z'), $this->send->campaign->opens->first()->created_at);
+    }
 
+    /** @test */
+    public function it_deletes_the_webhook_after_processing()
+    {
+        $this->webhookCall->update(['payload' => $this->getStub('openWebhookContent')]);
+
+        (new ProcessPostmarkWebhookJob($this->webhookCall))->handle();
+
+        $this->assertDeleted($this->webhookCall);
     }
 
     /** @test */

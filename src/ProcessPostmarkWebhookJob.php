@@ -30,6 +30,8 @@ class ProcessPostmarkWebhookJob extends ProcessWebhookJob
         $postmarkEvent = PostmarkEventFactory::createForPayload($payload);
 
         $postmarkEvent->handle($send);
+
+        $this->webhookCall->delete();
     }
 
     protected function getSend(): ?Send
