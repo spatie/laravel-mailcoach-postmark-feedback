@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-mailcoach-postmark-feedback` will be documented in this file
 
+## 2.2.0 - 2020-09-27
+
+- fire `WebhookCallProcessedEvent` after processing a webhook
+
 ## 2.1.1 - 2020-09-04
 
 - fix time on feedback registration

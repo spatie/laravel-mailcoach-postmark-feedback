@@ -3,6 +3,7 @@
 namespace Spatie\MailcoachPostmarkFeedback;
 
 use Illuminate\Support\Arr;
+use Spatie\Mailcoach\Events\WebhookCallProcessedEvent;
 use Spatie\Mailcoach\Models\Send;
 use Spatie\Mailcoach\Support\Config;
 use Spatie\WebhookClient\Models\WebhookCall;
@@ -25,11 +26,13 @@ class ProcessPostmarkWebhookJob extends ProcessWebhookJob
 
         if (!$send = $this->getSend()) {
             return;
-        };
+        }
 
         $postmarkEvent = PostmarkEventFactory::createForPayload($payload);
 
         $postmarkEvent->handle($send);
+
+        event(new WebhookCallProcessedEvent($this->webhookCall));
     }
 
     protected function getSend(): ?Send

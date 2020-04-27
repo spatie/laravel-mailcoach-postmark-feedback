@@ -3,7 +3,9 @@
 namespace Spatie\MailcoachPostmarkFeedback\Tests;
 
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Event;
 use Spatie\Mailcoach\Enums\SendFeedbackType;
+use Spatie\Mailcoach\Events\WebhookCallProcessedEvent;
 use Spatie\Mailcoach\Models\CampaignLink;
 use Spatie\Mailcoach\Models\CampaignOpen;
 use Spatie\Mailcoach\Models\Send;
@@ -92,7 +94,17 @@ class ProcessPostmarkWebhookJobTest extends TestCase
 
         $this->assertCount(1, $this->send->campaign->opens);
         $this->assertEquals(Carbon::parse('2019-11-05T16:33:54.0Z'), $this->send->campaign->opens->first()->created_at);
+    }
 
+    /** @test */
+    public function it_fires_an_event_after_processing_the_webhook_call()
+    {
+        Event::fake();
+
+        $this->webhookCall->update(['payload' => $this->getStub('openWebhookContent')]);
+        (new ProcessPostmarkWebhookJob($this->webhookCall))->handle();
+
+        Event::assertDispatched(WebhookCallProcessedEvent::class);
     }
 
     /** @test */
