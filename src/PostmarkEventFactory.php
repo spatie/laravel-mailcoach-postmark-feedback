@@ -4,10 +4,10 @@ namespace Spatie\MailcoachPostmarkFeedback;
 
 use Spatie\MailcoachPostmarkFeedback\PostmarkEvents\ClickEvent;
 use Spatie\MailcoachPostmarkFeedback\PostmarkEvents\ComplaintEvent;
-use Spatie\MailcoachPostmarkFeedback\PostmarkEvents\PostmarkEvent;
 use Spatie\MailcoachPostmarkFeedback\PostmarkEvents\OpenEvent;
 use Spatie\MailcoachPostmarkFeedback\PostmarkEvents\OtherEvent;
 use Spatie\MailcoachPostmarkFeedback\PostmarkEvents\PermanentBounceEvent;
+use Spatie\MailcoachPostmarkFeedback\PostmarkEvents\PostmarkEvent;
 
 class PostmarkEventFactory
 {

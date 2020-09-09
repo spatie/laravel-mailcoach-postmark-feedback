@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-mailcoach-postmark-feedback` will be documented in this file
 
+## 2.2.1 - 2020-09-09
+
+- add support for Laravel 8
+
 ## 2.2.0 - 2020-09-27
 
 - fire `WebhookCallProcessedEvent` after processing a webhook

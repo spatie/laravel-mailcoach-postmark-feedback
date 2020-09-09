@@ -3,7 +3,6 @@
 namespace Spatie\MailcoachPostmarkFeedback\Tests;
 
 use Illuminate\Support\Facades\Route;
-use Spatie\MailcoachPostmarkFeedback\PostmarkWebhookConfig;
 
 class RouteTest extends TestCase
 {

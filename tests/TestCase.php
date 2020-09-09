@@ -6,10 +6,8 @@ use CreateMailCoachTables;
 use CreateWebhookCallsTable;
 use Illuminate\Support\Facades\Route;
 use Orchestra\Testbench\TestCase as Orchestra;
-use Spatie\BladeX\BladeXServiceProvider;
 use Spatie\Mailcoach\MailcoachServiceProvider;
 use Spatie\MailcoachPostmarkFeedback\MailcoachPostmarkFeedbackServiceProvider;
-use Spatie\MailcoachPostmarkFeedback\PostmarkWebhookConfig;
 
 class TestCase extends Orchestra
 {

@@ -3,7 +3,6 @@
 namespace Spatie\MailcoachPostmarkFeedback\PostmarkEvents;
 
 use Carbon\Carbon;
-use Illuminate\Support\Arr;
 use Spatie\Mailcoach\Models\Send;
 
 class PermanentBounceEvent extends PostmarkEvent
