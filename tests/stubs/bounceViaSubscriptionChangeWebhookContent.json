@@ -1,0 +1,15 @@
+{
+  "RecordType":"SubscriptionChange",
+  "ServerID":123456,
+  "MessageStream": "outbound",
+  "ChangedAt": "2019-11-05T16:33:54.9070259Z",
+  "Recipient": "bounced-address@wildbit.com",
+  "Origin": "Recipient",
+  "SuppressSending": true,
+  "SuppressionReason": "HardBounce",
+  "Tag": "my-tag",
+  "MessageID": "20130503192659.13651.20287@mg.craftremote.com",
+  "Metadata" : {
+      "send-uuid" : "my-uuid"
+  }
+}

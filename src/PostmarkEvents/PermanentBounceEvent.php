@@ -9,20 +9,20 @@ class PermanentBounceEvent extends PostmarkEvent
 {
     public function canHandlePayload(): bool
     {
-        if ($this->event !== 'Bounce') {
-            return false;
+        if ($this->event === 'Bounce' && $this->payload['Type'] === 'HardBounce') {
+            return true;
         }
 
-        if ($this->payload['Type'] !== 'HardBounce') {
-            return false;
+        if ($this->event === 'SubscriptionChange' && ($this->payload['SuppressionReason'] ?? null) === 'HardBounce') {
+            return true;
         }
 
-        return true;
+        return false;
     }
 
     public function handle(Send $send)
     {
-        $bouncedAt = Carbon::parse($this->payload['BouncedAt']);
+        $bouncedAt = Carbon::parse($this->payload['BouncedAt'] ?? $this->payload['ChangedAt']);
 
         $send->registerBounce($bouncedAt);
     }
