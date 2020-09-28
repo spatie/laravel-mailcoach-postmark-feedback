@@ -9,12 +9,20 @@ class ComplaintEvent extends PostmarkEvent
 {
     public function canHandlePayload(): bool
     {
-        return $this->event === 'SpamComplaint';
+        if ($this->event === 'SpamComplaint') {
+            return true;
+        }
+
+        if ($this->event === 'SubscriptionChange' && ($this->payload['SuppressionReason'] ?? null) === 'SpamComplaint') {
+            return true;
+        }
+
+        return false;
     }
 
     public function handle(Send $send)
     {
-        $complainedAt = Carbon::parse($this->payload['BouncedAt']);
+        $complainedAt = Carbon::parse($this->payload['BouncedAt'] ?? $this->payload['ChangedAt']);
 
         $send->registerComplaint($complainedAt);
     }

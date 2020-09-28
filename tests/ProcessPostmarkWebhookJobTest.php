@@ -52,6 +52,20 @@ class ProcessPostmarkWebhookJobTest extends TestCase
     }
 
     /** @test */
+    public function it_processes_a_postmark_bounce_via_subscription_change_webhook_call()
+    {
+        $this->webhookCall->update(['payload' => $this->getStub('bounceViaSubscriptionChangeWebhookContent')]);
+        (new ProcessPostmarkWebhookJob($this->webhookCall))->handle();
+
+        $this->assertEquals(1, SendFeedbackItem::count());
+        tap(SendFeedbackItem::first(), function (SendFeedbackItem $sendFeedbackItem) {
+            $this->assertEquals(SendFeedbackType::BOUNCE, $sendFeedbackItem->type);
+            $this->assertEquals(Carbon::parse('2019-11-05T16:33:54.0Z'), $sendFeedbackItem->created_at);
+            $this->assertTrue($this->send->is($sendFeedbackItem->send));
+        });
+    }
+
+    /** @test */
     public function it_wil_not_process_a_postmark_soft_bounce_webhook_call()
     {
         $this->webhookCall->update(['payload' => $this->getStub('softBounceWebhookContent')]);
@@ -64,6 +78,20 @@ class ProcessPostmarkWebhookJobTest extends TestCase
     public function it_processes_a_postmark_complaint_webhook_call()
     {
         $this->webhookCall->update(['payload' => $this->getStub('complaintWebhookContent')]);
+        (new ProcessPostmarkWebhookJob($this->webhookCall))->handle();
+
+        $this->assertEquals(1, SendFeedbackItem::count());
+        tap(SendFeedbackItem::first(), function (SendFeedbackItem $sendFeedbackItem) {
+            $this->assertEquals(SendFeedbackType::COMPLAINT, $sendFeedbackItem->type);
+            $this->assertEquals(Carbon::parse('2019-11-05T16:33:54.0Z'), $sendFeedbackItem->created_at);
+            $this->assertTrue($this->send->is($sendFeedbackItem->send));
+        });
+    }
+
+    /** @test */
+    public function it_processes_a_postmark_complaint_via_subscription_change_webhook_call()
+    {
+        $this->webhookCall->update(['payload' => $this->getStub('complaintViaSubscriptionChangeWebhookContent')]);
         (new ProcessPostmarkWebhookJob($this->webhookCall))->handle();
 
         $this->assertEquals(1, SendFeedbackItem::count());
