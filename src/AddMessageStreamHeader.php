@@ -3,7 +3,6 @@
 
 namespace Spatie\MailcoachPostmarkFeedback;
 
-
 use Illuminate\Mail\Events\MessageSending;
 
 class AddMessageStreamHeader

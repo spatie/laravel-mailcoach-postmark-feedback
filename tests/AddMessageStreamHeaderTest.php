@@ -3,7 +3,6 @@
 
 namespace Spatie\MailcoachPostmarkFeedback\Tests;
 
-
 use Illuminate\Mail\Events\MessageSending;
 use Swift_Message;
 
