@@ -15,7 +15,7 @@ class AddMessageStreamHeader
             return;
         }
 
-        if (! $messageStream = config('mailcoach.postmark.message_stream')) {
+        if (! $messageStream = config('mailcoach.postmark_feedback.message_stream')) {
             return;
         }
 

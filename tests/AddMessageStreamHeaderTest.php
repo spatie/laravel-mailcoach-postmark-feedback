@@ -14,7 +14,7 @@ class AddMessageStreamHeaderTest extends TestCase
         $message = new Swift_Message('Test', 'body');
         $message->getHeaders()->addTextHeader('X-MAILCOACH', true);
 
-        config()->set('mailcoach.postmark.message_stream', 'hello');
+        config()->set('mailcoach.postmark_feedback.message_stream', 'hello');
         config()->set('mail.default', 'postmark');
         config()->set('mail.mailers.ses.transport', 'postmark');
 
