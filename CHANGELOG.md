@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-mailcoach-postmark-feedback` will be documented in this file
 
+## 2.4.0 - 2020-11-19
+
+- Add support for adding a Stream header by setting the `mailcoach.postmark.message_stream` config key
+
 ## 2.3.1 - 2020-09-28
 
 - Add support for Stream webhooks
