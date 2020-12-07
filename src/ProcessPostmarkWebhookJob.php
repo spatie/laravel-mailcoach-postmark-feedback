@@ -24,13 +24,10 @@ class ProcessPostmarkWebhookJob extends ProcessWebhookJob
     {
         $payload = $this->webhookCall->payload;
 
-        if (!$send = $this->getSend()) {
-            return;
+        if ($send = $this->getSend()) {
+            $postmarkEvent = PostmarkEventFactory::createForPayload($payload);
+            $postmarkEvent->handle($send);
         }
-
-        $postmarkEvent = PostmarkEventFactory::createForPayload($payload);
-
-        $postmarkEvent->handle($send);
 
         event(new WebhookCallProcessedEvent($this->webhookCall));
     }
