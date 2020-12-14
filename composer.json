@@ -27,7 +27,7 @@
     }
 ],
     "require": {
-        "php": "^7.4",
+        "php": "^8.0|^7.4",
         "illuminate/http": "^7.0|^8.0",
         "spatie/laravel-mailcoach": "^2.9|^3.0",
         "spatie/laravel-webhook-client": "^2.2"
@@ -38,7 +38,7 @@
         "fzaninotto/faker": "^1.9",
         "laravel/legacy-factories": "^1.0.4",
         "orchestra/testbench": "^5.0|^6.0",
-        "phpunit/phpunit": "^9.3",
+        "phpunit/phpunit": "^9.4",
         "symfony/var-dumper": "^5.0"
     },
     "autoload": {
