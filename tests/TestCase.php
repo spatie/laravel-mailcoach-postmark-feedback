@@ -5,6 +5,7 @@ namespace Spatie\MailcoachPostmarkFeedback\Tests;
 use CreateMailCoachTables;
 use CreateWebhookCallsTable;
 use Illuminate\Support\Facades\Route;
+use Livewire\LivewireServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 use Spatie\Mailcoach\MailcoachServiceProvider;
 use Spatie\MailcoachPostmarkFeedback\MailcoachPostmarkFeedbackServiceProvider;
@@ -27,6 +28,7 @@ class TestCase extends Orchestra
         return [
             MailcoachServiceProvider::class,
             MailcoachPostmarkFeedbackServiceProvider::class,
+            LivewireServiceProvider::class,
         ];
     }
 
