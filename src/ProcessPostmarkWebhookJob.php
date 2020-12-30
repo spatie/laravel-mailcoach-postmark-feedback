@@ -15,7 +15,7 @@ class ProcessPostmarkWebhookJob extends ProcessWebhookJob
     {
         parent::__construct($webhookCall);
 
-        $this->queue = config('mailcoach.perform_on_queue.process_feedback_job');
+        $this->queue = config('mailcoach.campaigns.perform_on_queue.process_feedback_job');
 
         $this->connection = $this->connection ?? Config::getQueueConnection();
     }
