@@ -8,8 +8,8 @@ use Spatie\Mailcoach\Domain\Campaign\Enums\SendFeedbackType;
 use Spatie\Mailcoach\Domain\Campaign\Events\WebhookCallProcessedEvent;
 use Spatie\Mailcoach\Domain\Campaign\Models\CampaignLink;
 use Spatie\Mailcoach\Domain\Campaign\Models\CampaignOpen;
-use Spatie\Mailcoach\Domain\Campaign\Models\Send;
-use Spatie\Mailcoach\Domain\Campaign\Models\SendFeedbackItem;
+use Spatie\Mailcoach\Domain\Shared\Models\Send;
+use Spatie\Mailcoach\Domain\Shared\Models\SendFeedbackItem;
 use Spatie\MailcoachPostmarkFeedback\ProcessPostmarkWebhookJob;
 use Spatie\WebhookClient\Models\WebhookCall;
 
