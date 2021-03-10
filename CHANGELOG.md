@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-mailcoach-postmark-feedback` will be documented in this file
 
+## 3.0.0 - 2021-03-10
+
+- Support for Mailcoach v4
+
 ## 2.4.2 - 2020-12-07
 
 - Mark webhook calls as processed when no send is found

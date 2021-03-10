@@ -28,7 +28,7 @@ class ProcessPostmarkWebhookJobTest extends TestCase
             'payload' => $this->getStub('bounceWebhookContent'),
         ]);
 
-        $this->send = factory(Send::class)->create();
+        $this->send = Send::factory()->create();
 
         $this->send->update(['uuid' => 'my-uuid']);
 

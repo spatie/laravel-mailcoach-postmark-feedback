@@ -3,7 +3,7 @@
 namespace Spatie\MailcoachPostmarkFeedback\PostmarkEvents;
 
 use Illuminate\Support\Arr;
-use Spatie\Mailcoach\Models\Send;
+use Spatie\Mailcoach\Domain\Shared\Models\Send;
 
 abstract class PostmarkEvent
 {

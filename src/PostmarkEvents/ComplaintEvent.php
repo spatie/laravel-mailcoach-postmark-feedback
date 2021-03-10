@@ -3,7 +3,7 @@
 namespace Spatie\MailcoachPostmarkFeedback\PostmarkEvents;
 
 use Carbon\Carbon;
-use Spatie\Mailcoach\Models\Send;
+use Spatie\Mailcoach\Domain\Shared\Models\Send;
 
 class ComplaintEvent extends PostmarkEvent
 {
