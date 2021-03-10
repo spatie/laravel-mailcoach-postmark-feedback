@@ -9,7 +9,7 @@ class AddMessageStreamHeader
 {
     public function handle(MessageSending $event)
     {
-        $driver = config('mailcoach.mailer') ?? config('mailcoach.campaign_mailer') ?? config('mail.default');
+        $driver = config('mailcoach.mailer') ?? config('mailcoach.campaigns.mailer') ?? config('mail.default');
 
         if ('postmark' !== config("mail.mailers.{$driver}.transport")) {
             return;
