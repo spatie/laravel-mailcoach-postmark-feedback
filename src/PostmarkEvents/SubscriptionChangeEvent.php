@@ -2,7 +2,6 @@
 
 namespace Spatie\MailcoachPostmarkFeedback\PostmarkEvents;
 
-use Carbon\Carbon;
 use Illuminate\Support\Arr;
 use Spatie\Mailcoach\Domain\Shared\Models\Send;
 
