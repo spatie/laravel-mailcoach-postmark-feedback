@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-mailcoach-postmark-feedback` will be documented in this file
 
+## 2.5.0 - 2021-03-24
+
+- Handle SubscriptionChange event from Postmark
+
 ## 2.4.2 - 2020-12-07
 
 - Mark webhook calls as processed when no send is found
