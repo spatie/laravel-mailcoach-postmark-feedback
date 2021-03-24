@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-mailcoach-postmark-feedback` will be documented in this file
 
+## 3.0.1 - 2021-03-24
+
+- Handle SubscriptionChange event from Postmark
+
 ## 3.0.0 - 2021-03-10
 
 - Support for Mailcoach v4
