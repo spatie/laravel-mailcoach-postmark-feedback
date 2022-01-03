@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Spatie\MailcoachPostmarkFeedback\Tests;
 
 use Illuminate\Mail\Events\MessageSending;

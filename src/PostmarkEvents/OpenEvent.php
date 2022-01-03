@@ -15,7 +15,7 @@ class OpenEvent extends PostmarkEvent
 
     public function handle(Send $send)
     {
-        if (!Arr::get($this->payload, 'FirstOpen')) {
+        if (! Arr::get($this->payload, 'FirstOpen')) {
             return;
         }
 
