@@ -3,15 +3,14 @@
 namespace Spatie\MailcoachPostmarkFeedback\Tests;
 
 use Illuminate\Mail\Events\MessageSending;
-use Symfony\Component\Mime\Email;
-use Symfony\Component\Mime\Part\TextPart;
+use Swift_Message;
 
 class AddMessageStreamHeaderTest extends TestCase
 {
     /** @test **/
     public function it_adds_a_message_stream_header_if_the_message_is_sent_by_mailcoach()
     {
-        $message = (new Email())->setBody(new TextPart('body'));
+        $message = new Swift_Message('Test', 'body');
         $message->getHeaders()->addTextHeader('X-MAILCOACH', true);
 
         config()->set('mailcoach.postmark_feedback.message_stream', 'hello');
@@ -20,6 +19,6 @@ class AddMessageStreamHeaderTest extends TestCase
 
         event(new MessageSending($message));
 
-        $this->assertEquals('hello', $message->getHeaders()->get('X-PM-Message-Stream')->getBodyAsString());
+        $this->assertEquals('hello', $message->getHeaders()->get('X-PM-Message-Stream')->getFieldBody());
     }
 }
