@@ -29,7 +29,7 @@
     "require": {
         "php": "^8.0",
         "spatie/laravel-mailcoach": "^5.0",
-        "symonfy/postmark-mailer": "^6.0"
+        "symfony/postmark-mailer": "^6.0"
     },
     "require-dev": {
         "ext-json": "*",
