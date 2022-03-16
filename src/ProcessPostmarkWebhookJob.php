@@ -6,11 +6,14 @@ use Illuminate\Support\Arr;
 use Spatie\Mailcoach\Domain\Campaign\Events\WebhookCallProcessedEvent;
 use Spatie\Mailcoach\Domain\Shared\Models\Send;
 use Spatie\Mailcoach\Domain\Shared\Support\Config;
+use Spatie\Mailcoach\Domain\Shared\Traits\UsesMailcoachModels;
 use Spatie\WebhookClient\Jobs\ProcessWebhookJob;
 use Spatie\WebhookClient\Models\WebhookCall;
 
 class ProcessPostmarkWebhookJob extends ProcessWebhookJob
 {
+    use UsesMailcoachModels;
+
     public function __construct(WebhookCall $webhookCall)
     {
         parent::__construct($webhookCall);
@@ -42,6 +45,8 @@ class ProcessPostmarkWebhookJob extends ProcessWebhookJob
 
         $messageId = $metadata['send-uuid'];
 
-        return Send::findByUuid($messageId);
+        $sendClass = $this->getSendClass();
+
+        return $sendClass::findByUuid($messageId);
     }
 }
