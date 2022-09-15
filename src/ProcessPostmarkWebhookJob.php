@@ -37,6 +37,17 @@ class ProcessPostmarkWebhookJob extends ProcessWebhookJob
 
     protected function getSend(): ?Send
     {
+        $send = $this->getSendByMetaData();
+
+        if (! $send) {
+            $send = $this->getSendByMessageId();
+        }
+
+        return $send;
+    }
+
+    protected function getSendByMetaData(): ?Send
+    {
         $metadata = Arr::get($this->webhookCall->payload, 'Metadata');
 
         if (! isset($metadata['send-uuid'])) {
@@ -45,8 +56,23 @@ class ProcessPostmarkWebhookJob extends ProcessWebhookJob
 
         $messageId = $metadata['send-uuid'];
 
-        $sendClass = $this->getSendClass();
+        $sendClass = self::getSendClass();
 
         return $sendClass::findByUuid($messageId);
+    }
+
+    protected function getSendByMessageId(): ?Send
+    {
+        $payload = $this->webhookCall->payload;
+
+        if (! isset($payload['MessageID'])) {
+            return null;
+        }
+
+        $messageId = $payload['MessageID'];
+
+        $sendClass = self::getSendClass();
+
+        return $sendClass::findByTransportMessageId($messageId);
     }
 }

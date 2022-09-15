@@ -125,6 +125,21 @@ class ProcessPostmarkWebhookJobTest extends TestCase
     }
 
     /** @test */
+    public function it_can_process_a_postmark_open_webhook_call_by_message_id()
+    {
+        $this->send->update(['transport_message_id' => 'some-message-id']);
+        $payload = $this->getStub('openWebhookContent');
+        $payload['MessageID'] = 'some-message-id';
+        unset($payload['Metadata']);
+
+        $this->webhookCall->update(['payload' => $payload]);
+        (new ProcessPostmarkWebhookJob($this->webhookCall))->handle();
+
+        $this->assertCount(1, $this->send->campaign->opens);
+        $this->assertEquals(Carbon::parse('2019-11-05T16:33:54.0Z'), $this->send->campaign->opens->first()->created_at);
+    }
+
+    /** @test */
     public function it_fires_an_event_after_processing_the_webhook_call()
     {
         Event::fake();
