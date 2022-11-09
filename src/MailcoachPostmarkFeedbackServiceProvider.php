@@ -13,7 +13,7 @@ class MailcoachPostmarkFeedbackServiceProvider extends ServiceProvider
     {
         Route::macro(
             'postmarkFeedback',
-            fn (string $url) => Route::post($url, '\\' . PostmarkWebhookController::class)
+            fn (string $url) => Route::post("{$url}/{mailer?}", '\\' . PostmarkWebhookController::class)
         );
 
         Event::listen(MessageSending::class, AddMessageStreamHeader::class);

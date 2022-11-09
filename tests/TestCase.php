@@ -2,14 +2,17 @@
 
 namespace Spatie\MailcoachPostmarkFeedback\Tests;
 
-use CreateMailCoachTables;
-use CreateWebhookCallsTable;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Route;
 use Livewire\LivewireServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 use Spatie\Mailcoach\MailcoachServiceProvider;
+use Spatie\MailcoachEditor\MailcoachEditorServiceProvider;
+use Spatie\MailcoachMailgunFeedback\MailcoachMailgunFeedbackServiceProvider;
 use Spatie\MailcoachPostmarkFeedback\MailcoachPostmarkFeedbackServiceProvider;
+use Spatie\MailcoachSendgridFeedback\MailcoachSendgridFeedbackServiceProvider;
+use Spatie\MailcoachSendinblueFeedback\MailcoachSendinblueFeedbackServiceProvider;
+use Spatie\MailcoachSesFeedback\MailcoachSesFeedbackServiceProvider;
 
 class TestCase extends Orchestra
 {
@@ -30,8 +33,13 @@ class TestCase extends Orchestra
     {
         return [
             LivewireServiceProvider::class,
-            MailcoachServiceProvider::class,
+            MailcoachMailgunFeedbackServiceProvider::class,
+            MailcoachSesFeedbackServiceProvider::class,
+            MailcoachSendgridFeedbackServiceProvider::class,
             MailcoachPostmarkFeedbackServiceProvider::class,
+            MailcoachSendinblueFeedbackServiceProvider::class,
+            MailcoachEditorServiceProvider::class,
+            MailcoachServiceProvider::class,
         ];
     }
 
@@ -49,11 +57,11 @@ class TestCase extends Orchestra
 
     protected function setUpDatabase()
     {
-        include_once __DIR__.'/../../../vendor/spatie/laravel-mailcoach/database/migrations/create_webhook_calls_table.php.stub';
-        (new CreateWebhookCallsTable())->up();
+        $createWebhookCalls = require __DIR__.'/../../../vendor/spatie/laravel-mailcoach/database/migrations/2022_02_10_000003_create_webhook_calls_table.php';
+        $createWebhookCalls->up();
 
-        include_once __DIR__.'/../../../vendor/spatie/laravel-mailcoach/database/migrations/create_mailcoach_tables.php.stub';
-        (new CreateMailCoachTables())->up();
+        $createMailcoachTables = require __DIR__.'/../../../vendor/spatie/laravel-mailcoach/database/migrations/2022_02_10_000001_create_mailcoach_tables.php';
+        $createMailcoachTables->up();
     }
 
     public function getStub(string $name): array
