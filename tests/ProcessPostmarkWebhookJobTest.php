@@ -31,6 +31,11 @@ class ProcessPostmarkWebhookJobTest extends TestCase
         $this->send = Send::factory()->create();
 
         $this->send->update(['uuid' => 'my-uuid']);
+
+        $this->send->campaign->update([
+            'track_opens' => true,
+            'track_clicks' => true,
+        ]);
     }
 
     /** @test */
@@ -40,7 +45,7 @@ class ProcessPostmarkWebhookJobTest extends TestCase
 
         $this->assertEquals(1, SendFeedbackItem::count());
         tap(SendFeedbackItem::first(), function (SendFeedbackItem $sendFeedbackItem) {
-            $this->assertEquals(SendFeedbackType::Bounce, $sendFeedbackItem->type);
+            $this->assertEquals(SendFeedbackType::BOUNCE, $sendFeedbackItem->type);
             $this->assertEquals(Carbon::parse('2019-11-05T16:33:54.0Z'), $sendFeedbackItem->created_at);
             $this->assertTrue($this->send->is($sendFeedbackItem->send));
         });
@@ -54,7 +59,7 @@ class ProcessPostmarkWebhookJobTest extends TestCase
 
         $this->assertEquals(1, SendFeedbackItem::count());
         tap(SendFeedbackItem::first(), function (SendFeedbackItem $sendFeedbackItem) {
-            $this->assertEquals(SendFeedbackType::Bounce, $sendFeedbackItem->type);
+            $this->assertEquals(SendFeedbackType::BOUNCE, $sendFeedbackItem->type);
             $this->assertEquals(Carbon::parse('2019-11-05T16:33:54.0Z'), $sendFeedbackItem->created_at);
             $this->assertTrue($this->send->is($sendFeedbackItem->send));
         });
@@ -77,7 +82,7 @@ class ProcessPostmarkWebhookJobTest extends TestCase
 
         $this->assertEquals(1, SendFeedbackItem::count());
         tap(SendFeedbackItem::first(), function (SendFeedbackItem $sendFeedbackItem) {
-            $this->assertEquals(SendFeedbackType::Complaint, $sendFeedbackItem->type);
+            $this->assertEquals(SendFeedbackType::COMPLAINT, $sendFeedbackItem->type);
             $this->assertEquals(Carbon::parse('2019-11-05T16:33:54.0Z'), $sendFeedbackItem->created_at);
             $this->assertTrue($this->send->is($sendFeedbackItem->send));
         });
@@ -91,7 +96,7 @@ class ProcessPostmarkWebhookJobTest extends TestCase
 
         $this->assertEquals(1, SendFeedbackItem::count());
         tap(SendFeedbackItem::first(), function (SendFeedbackItem $sendFeedbackItem) {
-            $this->assertEquals(SendFeedbackType::Complaint, $sendFeedbackItem->type);
+            $this->assertEquals(SendFeedbackType::COMPLAINT, $sendFeedbackItem->type);
             $this->assertEquals(Carbon::parse('2019-11-05T16:33:54.0Z'), $sendFeedbackItem->created_at);
             $this->assertTrue($this->send->is($sendFeedbackItem->send));
         });
@@ -137,7 +142,7 @@ class ProcessPostmarkWebhookJobTest extends TestCase
     /** @test */
     public function it_fires_an_event_after_processing_the_webhook_call()
     {
-        Event::fake(WebhookCallProcessedEvent::class);
+        Event::fake();
 
         $this->webhookCall->update(['payload' => $this->getStub('openWebhookContent')]);
         (new ProcessPostmarkWebhookJob($this->webhookCall))->handle();
