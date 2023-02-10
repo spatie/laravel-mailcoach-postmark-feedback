@@ -34,7 +34,7 @@
     "require-dev": {
         "ext-json": "*",
         "fakerphp/faker": "^1.12",
-        "orchestra/testbench": "^7.0",
+        "orchestra/testbench": "^7.0|^8.0",
         "phpunit/phpunit": "^9.5",
         "symfony/var-dumper": "^6.0"
     },
