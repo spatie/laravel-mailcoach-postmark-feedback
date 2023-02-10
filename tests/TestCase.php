@@ -57,10 +57,10 @@ class TestCase extends Orchestra
 
     protected function setUpDatabase()
     {
-        $createWebhookCalls = require __DIR__.'/../../../vendor/spatie/laravel-mailcoach/database/migrations/2022_02_10_000003_create_webhook_calls_table.php';
+        $createWebhookCalls = require __DIR__.'/../../../vendor/spatie/laravel-mailcoach/database/migrations/create_webhook_calls_table.php';
         $createWebhookCalls->up();
 
-        $createMailcoachTables = require __DIR__.'/../../../vendor/spatie/laravel-mailcoach/database/migrations/2022_02_10_000001_create_mailcoach_tables.php';
+        $createMailcoachTables = require __DIR__.'/../../../vendor/spatie/laravel-mailcoach/database/migrations/create_mailcoach_tables.php';
         $createMailcoachTables->up();
     }
 
