@@ -8,6 +8,7 @@ use Spatie\MailcoachPostmarkFeedback\PostmarkEvents\OpenEvent;
 use Spatie\MailcoachPostmarkFeedback\PostmarkEvents\OtherEvent;
 use Spatie\MailcoachPostmarkFeedback\PostmarkEvents\PermanentBounceEvent;
 use Spatie\MailcoachPostmarkFeedback\PostmarkEvents\PostmarkEvent;
+use Spatie\MailcoachPostmarkFeedback\PostmarkEvents\SoftBounceEvent;
 use Spatie\MailcoachPostmarkFeedback\PostmarkEvents\SubscriptionChangeEvent;
 
 class PostmarkEventFactory
@@ -17,6 +18,7 @@ class PostmarkEventFactory
         ComplaintEvent::class,
         OpenEvent::class,
         PermanentBounceEvent::class,
+        SoftBounceEvent::class,
         SubscriptionChangeEvent::class,
     ];
 

@@ -28,7 +28,7 @@
 ],
     "require": {
         "php": "^8.1",
-        "spatie/laravel-mailcoach": "^6.0",
+        "spatie/laravel-mailcoach": "^6.18",
         "symfony/postmark-mailer": "^6.0"
     },
     "require-dev": {
